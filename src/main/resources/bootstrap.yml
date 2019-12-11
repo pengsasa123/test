@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: qingzu
+  # nacos 配置中心
+  cloud:
+    nacos:
+      config:
+        server-addr: 115.159.222.87:8848
+        namespace: b0a1af47-8809-4b35-9df3-559cc4cf9381
+        ext-config[0]:
+          data-id: ${spring.application.name}.yml
+          group: DEFAULT_GROUP
+      discovery:
+        server-addr: 115.159.222.87:8848
+        namespace: b0a1af47-8809-4b35-9df3-559cc4cf9381
