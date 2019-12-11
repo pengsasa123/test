@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springboot.sample" level="INFO"/>
+
+    <property name="logPath" value="/data/testLog"/>
+    <property name="logFile" value="test.log"/>
+
+    <appender name="FILE-OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logPath}${logFile}</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--按天压缩-->
+            <FileNamePattern>${logPath}daily/${logFile}.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+            <!-- 保存30天的数据-->
+            <maxHistory>30</maxHistory>
+            <!--最多保留文件大小-->
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>[%p] | %d{yyyy-MM-dd HH:mm:ss.SSS} | %t | %X{traceId} | %C{1}:%M | %L | %m %n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- 开发、测试环境 -->
+    <springProfile name="dev,test">
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="org.springboot.sample" level="INFO"/>
+        <logger name="com.qingzu" level="DEBUG"/>
+    </springProfile>
+
+    <!-- 预发布 为了线上调试方便使用debug级别日志 -->
+    <springProfile name="pre">
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="org.springboot.sample" level="INFO"/>
+        <logger name="com.qingzu" level="DEBUG"/>
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+        <logger name="org.springframework.web" level="ERROR"/>
+        <logger name="org.springboot.sample" level="ERROR"/>
+        <logger name="com.qingzu" level="INFO"/>
+    </springProfile>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-OUT"/>
+    </root>
+
+</configuration>
