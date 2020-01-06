@@ -4,7 +4,7 @@
     <logger name="org.springframework.web" level="INFO"/>
     <logger name="org.springboot.sample" level="INFO"/>
 
-    <property name="logPath" value="/data/testLog"/>
+    <property name="logPath" value="/logs/app/testLog"/>
     <property name="logFile" value="test.log"/>
 
     <appender name="FILE-OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -26,21 +26,21 @@
     <springProfile name="dev,test">
         <logger name="org.springframework.web" level="INFO"/>
         <logger name="org.springboot.sample" level="INFO"/>
-        <logger name="com.qingzu" level="DEBUG"/>
+        <logger name="com.example" level="INFO"/>
     </springProfile>
 
     <!-- 预发布 为了线上调试方便使用debug级别日志 -->
     <springProfile name="pre">
         <logger name="org.springframework.web" level="INFO"/>
         <logger name="org.springboot.sample" level="INFO"/>
-        <logger name="com.qingzu" level="DEBUG"/>
+        <logger name="com.example" level="INFO"/>
     </springProfile>
 
     <!-- 生产环境 -->
     <springProfile name="prod">
         <logger name="org.springframework.web" level="ERROR"/>
         <logger name="org.springboot.sample" level="ERROR"/>
-        <logger name="com.qingzu" level="INFO"/>
+        <logger name="com.example" level="INFO"/>
     </springProfile>
 
     <root level="info">
