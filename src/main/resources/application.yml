@@ -1,0 +1,8 @@
+
+spring:
+  # 环境 dev|st|pre|prod
+  profiles:
+    active: dev
+
+logging:
+  config: classpath:logback-spring.xml

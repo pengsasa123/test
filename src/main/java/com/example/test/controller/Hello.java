@@ -1,5 +1,6 @@
 package com.example.test.controller;
 
+import com.example.test.config.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,9 +21,9 @@ public class Hello {
     private String name;
 
     @GetMapping("/hello")
-    public String test(){
+    public Result test(){
         log.info("#################进入了");
-        return name;
+        return Result.success();
     }
 
 
